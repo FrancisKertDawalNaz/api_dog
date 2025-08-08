@@ -10,15 +10,6 @@ Route::get('/', function () {
 
 Route::get('/dog', [DogController::class, 'show']);
 
-Route::get('/cat', function () {
-    $response = Http::get('https://api.thecatapi.com/v1/images/search');
+Route::get('/cat', [DogController::class, 'showAnother']);
 
-    if ($response->successful()) {
-        $data = $response->json();
-        $catImage = $data[0]['url'] ?? null;
-    } else {
-        $catImage = null;
-    }
-
-    return view('cat', compact('catImage'));
-});
+Route::get('/joke', [DogController::class, 'jokes']);
